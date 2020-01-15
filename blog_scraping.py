@@ -40,9 +40,13 @@ with open(csv_file, "w") as f:
         for article in articles:
             a_tag = article.find("a")
             title = a_tag.get_text()
-            url = f"https://www.rithmschool.com{a_tag.attrs['href']}"
+            url = f"{base_url}{a_tag.attrs['href']}"
             date = article.find("time")['datetime']
-            csv_writer.writerow({'Title': title, 'Date': date, 'URL': url})
+            csv_writer.writerow({
+                'Title': title,
+                'Date': date,
+                'URL': url
+            })
 
         # After collecting articles, if we are on the last page, break out.
         # Else, update blog_url with next page.
